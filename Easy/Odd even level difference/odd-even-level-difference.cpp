@@ -100,43 +100,25 @@ struct Node
     Node* right;
 }; */
 
-class Solution{
+class Solution{ 
+  private:
+    void Difference(Node* root, int level, int& evenSum, int& oddSum) {
+        if(root == NULL) return;
+        if(level % 2 == 0) evenSum += root->data;
+        if(level % 2 == 1) oddSum += root->data;
+        Difference(root->left, level+1, evenSum, oddSum);
+        Difference(root->right, level+1, evenSum, oddSum);
+    }
   public:
     /*You are required to complete this function*/
     int getLevelDiff(Node *root)
     {
        //Your code here
-       queue<Node*> q;
-       q.push(root);
-       vector<vector<int>> ans;
+       int evenSum = 0;
+       int oddSum = 0;
+       Difference(root, 1, evenSum, oddSum);
        
-       while(!q.empty()) {
-           int size =  q.size();
-           vector<int> V;
-           while(size > 0) {
-               Node* node = q.front();
-               V.push_back(node->data);
-               q.pop();
-               if(node->left != NULL) q.push(node->left);
-               if(node->right != NULL) q.push(node->right);
-               
-               size--;
-           }
-           ans.push_back(V);
-       }
-       int evenSum = 0, oddSum = 0;
-       for(int i = 0; i < ans.size(); i++) {
-           if(i % 2 == 0) {
-               vector<int> x = ans[i];
-               for(auto it : x) evenSum += it;
-           }
-           else {
-               vector<int> x = ans[i];
-               for(auto it : x) oddSum += it;
-           }
-       }
-       // cout << oddSum << " " << evenSum;
-       return (evenSum - oddSum);
+       return oddSum - evenSum;
     }
 };
 
