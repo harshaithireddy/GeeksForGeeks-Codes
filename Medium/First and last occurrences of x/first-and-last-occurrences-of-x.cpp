@@ -9,14 +9,24 @@ class Solution
     vector<int> find(int arr[], int n , int x )
     {
         // code here
-        vector<int> V;
-        for (int i = 0; i < n; i++) {
-            if(arr[i] == x) V.push_back(i);
-            if(!V.empty() && arr[i] != x) break;
+        int left = 0;
+        int right = n - 1;
+        
+        vector<int> v;
+        v.push_back(-1);
+        v.push_back(-1);
+        
+        while(left <= right) {
+            if(arr[left] == x && arr[right] == x) {
+                v[0] = left;
+                v[1] = right;
+                break;
+            }
+            if(arr[left] != x) left++;
+            if(arr[right] != x) right--;
         }
-        if(V.empty()) return {-1, -1};
-        if(V.size() == 1) return {V[0], V[0]};
-        return {V[0], V[V.size()-1]};
+        if(!v.empty()) return v;
+        return {-1, -1};
     }
 };
 
