@@ -1,15 +1,31 @@
 //{ Driver Code Starts
 #include <bits/stdc++.h>
-
 using namespace std;
+
+class Array {
+  public:
+    template <class T>
+    static void input(vector<T> &A, int n) {
+        for (int i = 0; i < n; i++) {
+            scanf("%d ", &A[i]);
+        }
+    }
+
+    template <class T>
+    static void print(vector<T> &A) {
+        for (int i = 0; i < A.size(); i++) {
+            cout << A[i] << " ";
+        }
+        cout << endl;
+    }
+};
 
 
 // } Driver Code Ends
-// User function template for C++
+
 class Solution {
   public:
-    // Program for zig-zag conversion of array
-    void zigZag(int arr[], int n) {
+    void zigZag(int n, vector<int> &arr) {
         // code here
         bool flag = true;
         for(int i = 0; i < n - 1; i++) {
@@ -21,44 +37,60 @@ class Solution {
     }
 };
 
+
 //{ Driver Code Starts.
 
-bool isZigzag(int arr[], int n){
-    int f=1;
-    
-    for(int i=1; i<n; i++){
-        if(f){
-            if(arr[i-1]>arr[i]) return 0;
+bool isZigzag(int n, vector<int> &arr) {
+    int f = 1;
+
+    for (int i = 1; i < n; i++) {
+        if (f) {
+            if (arr[i - 1] > arr[i])
+                return 0;
+        } else {
+            if (arr[i - 1] < arr[i])
+                return 0;
         }
-        else{
-            if(arr[i-1]<arr[i]) return 0;
-        }
-        f=f^1;
+        f = f ^ 1;
     }
-    
+
     return 1;
 }
 
 int main() {
     int t;
-    cin >> t;
+    scanf("%d ", &t);
     while (t--) {
+
         int n;
-        cin >> n;
-        int arr[n];
+        scanf("%d", &n);
+
+        vector<int> arr(n);
+        Array::input(arr, n);
+
+        Solution obj;
+        //
+        obj.zigZag(n, arr);
+        bool flag = 0;
         for (int i = 0; i < n; i++) {
-            cin >> arr[i];
+            if (arr[i] == i % 2) {
+                flag = 0;
+            } else {
+                flag = 1;
+                break;
+            }
         }
-        Solution ob;
-        ob.zigZag(arr, n);
-        bool check=1;
-        check=isZigzag(arr,n);
-        
-        if(check) cout<<"1\n";
-        else cout<<"0\n";
-        
+        if (flag == 0) {
+            cout << "0\n";
+        } else {
+            bool check = 1;
+            check = isZigzag(n, arr);
+            if (check)
+                cout << "1\n";
+            else
+                cout << "0\n";
+        }
     }
-    return 0;
 }
 
 // } Driver Code Ends
