@@ -7,11 +7,10 @@ using namespace std;
 
 // } Driver Code Ends
 // User function Template for C++
-
 class Solution {
   public:
     void dfs(int node,vector<bool>& vis,vector<int> adj[]){
-        if(!vis[node]) return;
+        if(vis[node] == false) return;
         vis[node] = false;
         for(auto it : adj[node]){
             dfs(it, vis, adj);
