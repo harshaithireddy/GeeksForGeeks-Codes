@@ -1,49 +1,47 @@
 //{ Driver Code Starts
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 
 // } Driver Code Ends
 
-class Solution
-{
-    public:
+class Solution {
+  public:
     bool isMatching(char opening, char closing) {
         return (opening == '(' && closing == ')') || (opening == '[' && closing == ']') || (opening == '{' && closing == '}');
     }
-    //Function to check if brackets are balanced or not.
-    bool ispar(string x)
-    {
-        // Your code here
+    
+    bool isBalanced(string& s) {
+        // code here
         stack<char> st;
-        for(int i = 0; i < x.size(); i++) {
-            if(x[i] == '(' || x[i] == '[' || x[i] == '{') st.push(x[i]);
+        for(int i = 0; i < s.size(); i++) {
+            if(s[i] == '(' || s[i] == '[' || s[i] == '{') st.push(s[i]);
             
-            else if(x[i] == ')' || x[i] == ']' || x[i] == '}') {
-                if(st.empty() || !isMatching(st.top(), x[i])) return false;
+            else if(s[i] == ')' || s[i] == ']' || s[i] == '}') {
+                if(st.empty() || !isMatching(st.top(), s[i])) return false;
                 st.pop();
             }
         }
         return st.empty();
     }
-
 };
 
 //{ Driver Code Starts.
 
-int main()
-{
-   int t;
-   string a;
-   cin>>t;
-   while(t--)
-   {
-       cin>>a;
-       Solution obj;
-       if(obj.ispar(a))
-        cout<<"balanced"<<endl;
-       else
-        cout<<"not balanced"<<endl;
-   }
+int main() {
+    int t;
+    string a;
+    cin >> t;
+    while (t--) {
+        cin >> a;
+        Solution obj;
+        if (obj.isBalanced(a))
+            cout << "true" << endl;
+        else
+            cout << "false" << endl;
+
+        cout << "~"
+             << "\n";
+    }
 }
 // } Driver Code Ends
