@@ -19,7 +19,7 @@ class Solution {
         
         for(int r = 0; r < n; r++) {
             mpp[s[r]]++;
-            while(mpp.size() > k) {
+            while(mpp.size() >= k) {
                 mpp[s[l]]--;
                 if(mpp[s[l]] == 0) mpp.erase(s[l]);
                 l++;
@@ -30,7 +30,7 @@ class Solution {
     }
     int countSubstr(string& s, int k) {
         // code here
-        return cnt(s, k) - cnt(s, k - 1);
+        return cnt(s, k+1) - cnt(s, k);
     }
 };
 
