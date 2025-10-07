@@ -1,4 +1,16 @@
-// Function to return a list containing the bottom view of the given tree.
+/*
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int x) {
+        data = x;
+        left = right = NULL;
+    }
+};
+*/
 
 class Solution {
   public:
@@ -24,8 +36,9 @@ class Solution {
             res.push_back(it.second);
         }
     }
+    
     vector<int> bottomView(Node *root) {
-        // Your Code Here
+        // code here
         vector<int> res;
         if(!root) return res;
         
